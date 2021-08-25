@@ -1,7 +1,7 @@
 # myEsp_weather_station
----------------------------------------------------------------------------------
 
-__/docs saves Static page for boardcasting display contents__
+
+__/docs saves Static page for boardcasting display contents__<br>
 Using esp8266 series board（e.g. esp01s）
 
 _本项目参考太极创客团队的天气时钟项目，原作者[gitee地址](https://gitee.com/taijichuangke/bilibili_weather_clock)_
@@ -17,7 +17,7 @@ _本项目参考太极创客团队的天气时钟项目，原作者[gitee地址]
 
 >为图片预留接口类似天气API，本质上是获取json文件
 >
->该json文件中储存标签和图片取模后数组（宽64*高32），取模方式：__阴码，逆序，逐行__。该数组必须是累计256个__整形十进制数字__。json文件中`status`标签决定是否显示该图，`meof`校验esp8266端接收完整性，保持`true`即可
+>该json文件中储存标签和图片取模后数组（宽64*高32），取模方式： __阴码，逆序，逐行__ 。该数组必须是累计256个 __整形十进制数字__ 。json文件中`status`标签决定是否显示该图，`meof`校验esp8266端接收完整性，保持`true`即可
 >
 >_[json示例](https://github.com/auto-Dog/myEsp_weather_station/blob/main/samplebmp.json)_
 >
