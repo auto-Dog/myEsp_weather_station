@@ -262,7 +262,7 @@ bool bmpRemote::downloadBmp(String url){
       if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
         String payload = https.getString();
         Serial.println(payload);
-        DynamicJsonDocument  jsonBuffer(6144);  //CANNOT be larger!
+        DynamicJsonDocument  jsonBuffer(2048);  //CANNOT be larger!
         deserializeJson(jsonBuffer, payload);
         JsonObject root = jsonBuffer.as<JsonObject>();
 
@@ -272,11 +272,13 @@ bool bmpRemote::downloadBmp(String url){
         Serial.println("Result of reading EOF:");
         Serial.println(json_eof);
         if(json_eof){
-          for(int i=0;i<256;++i){
-             bmp_rcv[i] = root["data"][i];
+          for(int i=0;i<832;++i){
+             //bmp_rcv[i] = root["data"][i];
              //Serial.print(bmp_rcv[i]);
+			 bmp_rcv[i] = str16_to_hex(bmp_rcvtmp[2*i],bmp_rcvtmp[2*i+1]);
+															  
           }
-          bmp_rcv[256]='\0';
+          bmp_rcv[832]='\0';
           disp_state=root["status"];
 
         }
@@ -294,4 +296,22 @@ bool bmpRemote::downloadBmp(String url){
   }
 
   return disp_state;
+}
+
+unsigned char str16_to_hex(char inputstr16,char inputstr1){
+  char res=0;
+  if(inputstr16>='A'&&inputstr16<='F'){
+    res=16*(inputstr16-'A'+10);
+  }
+  else if(inputstr16>='0'&&inputstr16<='9'){
+    res=16*(inputstr16-'0');
+  }
+
+  if(inputstr1>='A'&&inputstr1<='F'){
+    res+=1*(inputstr1-'A'+10);
+  }
+  else if(inputstr1>='0'&&inputstr1<='9'){
+    res+=1*(inputstr1-'0');
+  }
+  return res;
 }

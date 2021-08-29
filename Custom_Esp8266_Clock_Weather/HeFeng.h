@@ -37,7 +37,8 @@ class HeFeng {
 class bmpRemote {
   public:
     bmpRemote();
-    unsigned char bmp_rcv[257];
+    unsigned char bmp_rcv[833];
     bool disp_state;
     bool downloadBmp(String url);
 };
+unsigned char str16_to_hex(char inputstr16,char inputstr1);														   

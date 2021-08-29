@@ -1,6 +1,6 @@
 /**************************************************************/
 /*   Powerd by DAYU and customized by AlphaDu,2021/08/24      */
-/*   Ver 2.1                                                  */
+/*   Ver 2.03 without info                                    */
 /*   Add dim mode;                                            */
 /*   Add energy saving mode                                   */
 /**************************************************************/
@@ -306,7 +306,8 @@ bool webconnect(bool is_running) {  ////Web配网，密码直连将其注释
   // display.display();
   WiFiManager wifiManager;  //实例化WiFiManager
   if(is_running){
-    return wifiManager.autoConnect(mySSID);
+    wifiManager.setConnectTimeout(20); //设置超时
+	return wifiManager.autoConnect(mySSID);
   }
   else{
     wifiManager.setDebugOutput(false); //关闭Debug
